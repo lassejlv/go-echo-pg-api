@@ -81,6 +81,16 @@ func main() {
 		return c.String(http.StatusOK, fmt.Sprintf("OS: %s, ARCH: %s", runtime.GOOS, runtime.GOARCH))
 	})
 
+	app.GET("/health", func(c echo.Context) error {
+		is_db_okay := db.Ping()
+
+		if is_db_okay != nil {
+			return echo.NewHTTPError(http.StatusInternalServerError, is_db_okay.Error())
+		}
+
+		return c.String(http.StatusOK, "OK")
+	})
+
 	app.GET("/users", func(c echo.Context) error {
 
 		var users []User
@@ -91,6 +101,18 @@ func main() {
 		}
 
 		return c.JSON(http.StatusOK, users)
+	})
+
+	app.GET("/users/:id", func(c echo.Context) error {
+		id := c.Param("id")
+		var user User
+		err := db.Get(&user, "SELECT * FROM users WHERE id = $1", id)
+
+		if err != nil {
+			return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
+		}
+
+		return c.JSON(http.StatusOK, user)
 	})
 
 	app.POST("/users", func(c echo.Context) error {
