@@ -52,8 +52,6 @@ func (cv *CustomValidator) Validate(i interface{}) error {
 func main() {
 	godotenv.Load()
 
-	// connStr := "host=personal.proxy.lasses.cloud port=5551 user=postgres password=8p5CLfjLZUlpsUQqzsNdfzvdm2oVoWm0lJw1E2Lcbldq4z0x09zwpQsDXn5OURH8 dbname=postgres sslmode=disable connect_timeout=5"
-
 	// Setup db
 	db, err := sqlx.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
