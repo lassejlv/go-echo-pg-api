@@ -27,7 +27,7 @@ type (
 	User struct {
 		ID           int    `json:"id" db:"id"`
 		Username     string `json:"username" db:"username"`
-		PasswordHash string `json:"password_hash" db:"password_hash"` // Add db tag
+		PasswordHash string `json:"password_hash" db:"password_hash"`
 		CreatedAt    string `json:"created_at" db:"created_at"`
 		UpdatedAt    string `json:"updated_at" db:"updated_at"`
 	}
