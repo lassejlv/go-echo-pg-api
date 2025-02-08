@@ -24,6 +24,12 @@ type (
 		Password string `json:"password" form:"password" validate:"required"`
 	}
 
+	ValidatePost struct {
+		Title   string `json:"title" form:"title" validate:"required"`
+		Content string `json:"content" form:"content" validate:"required"`
+		UserId  int    `json:"user_id" form:"user_id" validate:"required"`
+	}
+
 	User struct {
 		ID           int    `json:"id" db:"id"`
 		Username     string `json:"username" db:"username"`
@@ -89,6 +95,13 @@ func main() {
 		}
 
 		return c.String(http.StatusOK, "OK")
+	})
+
+	app.GET("/stats", func(c echo.Context) error {
+
+		db_stats := db.Stats()
+
+		return c.JSON(http.StatusOK, db_stats)
 	})
 
 	app.GET("/users", func(c echo.Context) error {
