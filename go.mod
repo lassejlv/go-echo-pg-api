@@ -1,4 +1,4 @@
-module github.com/lassejlv/templ
+module github.com/lassejlv/go-echo
 
 go 1.23.5
 

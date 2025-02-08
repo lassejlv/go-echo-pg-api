@@ -14,7 +14,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/lassejlv/templ/utils"
+	"github.com/lassejlv/go-echo/utils"
 	_ "github.com/lib/pq"
 )
 
